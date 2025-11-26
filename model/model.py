@@ -15,10 +15,10 @@ class Model:
         guadagno medio per spedizione >= threshold (euro)
         """
         # TODO
-        #self.G.add_nodes_from(i for i in range(self._nodes))
+        self.G.add_nodes_from(i for i in range(self._nodes))
         rami=[]
         for i in self.get_all_edges():
-            if i[2].get("peso",0) >= int(threshold):
+            if i[2].get("peso",0) >= int(threshold) and i[2].get("peso",0)!=0 :
                 rami.append(i)
         self.G.add_edges_from(rami)
         result=""
@@ -31,7 +31,7 @@ class Model:
             # print(p)
             result= result + f"{i + 1}) [{h1[0]} ({h1[1]}) -> {h2[0]} ({h2[1]})] - guadagno Medio Per Spedizione: € {p} \n"
         #print(result)
-        return len(self.G.nodes), len(rami),result
+        return self._nodes, len(rami),result
 
 
     def get_num_edges(self):
